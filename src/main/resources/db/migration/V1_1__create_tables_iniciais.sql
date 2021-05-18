@@ -3,7 +3,6 @@ CREATE TABLE "produto" (
   "descricao" varchar(200),
   "idfinalidade" bigint,
   "unidade" varchar(2),
-  "idcombo" bigint,
   "custo_liquido" numeric(24,10),
   "custo_bruto" numeric(24,10),
   "preco_venda" numeric(24,10),
