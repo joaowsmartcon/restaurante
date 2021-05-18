@@ -113,7 +113,7 @@ public class Produto {
 		return dataCadastro;
 	}
 
-	void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
