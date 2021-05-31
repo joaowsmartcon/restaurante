@@ -1,6 +1,5 @@
 package com.restaurante.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class ProdutoController {
 	@PostMapping(value = "/save")
 	public ResponseEntity<String> getSaveProduto(@RequestBody Produto produto) {
 		try {
-			produto.setDataCadastro(new Date());
+			produto.setDataCadastro(new Date());  
 			this.produtoService.saveProduto(produto);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {

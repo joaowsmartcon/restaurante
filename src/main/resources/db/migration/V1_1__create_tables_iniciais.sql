@@ -26,7 +26,7 @@ CREATE TABLE "combo_produto_relacao" (
   "id" BIGSERIAL PRIMARY KEY,
   "idcombo" bigint,
   "idproduto" bigint,
-  "qtde" int,
+  "qtde" bigint,
   "valor" numeric(24,10)
 );
 
@@ -122,6 +122,26 @@ CREATE TABLE "recibo" (
   "acrescimo" numeric(24,10),
   "valor_total" numeric(24,10)
 );
+
+CREATE TABLE public.empresa_pessoa_endereco
+(
+    id serial NOT NULL,
+    endereco character varying(200),
+    cidade character varying(200),
+    uf character varying(2),
+    bairro character varying(200),
+    numero character varying(200),
+    idempresapessa bigint,
+    PRIMARY KEY (id),
+    FOREIGN KEY (idempresapessa)
+        REFERENCES public.empresa_pessoa (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE public.empresa_pessoa_endereco
+    OWNER to postgres;
 
 ALTER TABLE "recibo" ADD FOREIGN KEY ("idfinanceiro") REFERENCES "financeiro" ("id");
 
