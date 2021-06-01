@@ -27,7 +27,7 @@ public class Comanda {
 	private EmpresaPessoa pessoa;
 	
 	@Column(name = "data_cadastro")
-	private Date dataCadast;
+	private Date dataCadastro;
 	
 	private BigDecimal desconto;
 	
@@ -50,12 +50,12 @@ public class Comanda {
 		this.pessoa = pessoa;
 	}
 
-	Date getDataCadast() {
-		return dataCadast;
+	Date getDataCadastro() {
+		return dataCadastro;
 	}
 
-	void setDataCadast(Date dataCadast) {
-		this.dataCadast = dataCadast;
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	BigDecimal getDesconto() {
@@ -78,7 +78,7 @@ public class Comanda {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dataCadast == null) ? 0 : dataCadast.hashCode());
+		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
 		result = prime * result + ((desconto == null) ? 0 : desconto.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
@@ -95,10 +95,10 @@ public class Comanda {
 		if (getClass() != obj.getClass())
 			return false;
 		Comanda other = (Comanda) obj;
-		if (dataCadast == null) {
-			if (other.dataCadast != null)
+		if (dataCadastro == null) {
+			if (other.dataCadastro != null)
 				return false;
-		} else if (!dataCadast.equals(other.dataCadast))
+		} else if (!dataCadastro.equals(other.dataCadastro))
 			return false;
 		if (desconto == null) {
 			if (other.desconto != null)

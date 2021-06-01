@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.restaurante.model.Produto;
-import com.restaurante.service.ProdutoService;
+import com.restaurante.model.Parcela;
+import com.restaurante.service.ParcelaService;
 
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/parcela")
+public class ParcelaController {
 	
 	@Autowired
-	ProdutoService produtoService;
+	ParcelaService parcelaService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<String> getFindAllProducts(){
+	public ResponseEntity<String> getFindAllParcelas(){
 		try {
-			List<Produto> produtos = this.produtoService.findAllProdutos();
+			List<Parcela> parcelas = this.parcelaService.findAllParcelas();
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produtos);
+			String retorno = gson.toJson(parcelas);
 			return new ResponseEntity<String>(retorno, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -38,12 +38,12 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/find")
-	public ResponseEntity<String> getFindProduto(@RequestParam(value="id", required=true) String id) {
+	public ResponseEntity<String> getFindParcela(@RequestParam(value="id", required=true) String id) {
 		try {
-			Produto produto =  this.produtoService.findProduto(id);
+			Parcela parcela =  this.parcelaService.findParcela(id);
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produto);
-			if(produto != null) {
+			String retorno = gson.toJson(parcela);
+			if(parcela != null) {
 				return new ResponseEntity<String>(retorno, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(value = "/save")
-	public ResponseEntity<String> getSaveProduto(@RequestBody Produto produto) {
+	public ResponseEntity<String> getSaveParcela(@RequestBody Parcela parcela) {
 		try {
-			produto.setDataCadastro(new Date());  
-			this.produtoService.saveProduto(produto);
+			parcela.setDataCadastro(new Date());  
+			this.parcelaService.saveParcela(parcela);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -65,9 +65,9 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> getDeleteProduto(@RequestParam(value="id", required=true) String id){
+	public ResponseEntity<String> getDeleteParcela(@RequestParam(value="id", required=true) String id){
 		try {
-			this.produtoService.deleteProduto(id);
+			this.parcelaService.deleteParcela(id);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

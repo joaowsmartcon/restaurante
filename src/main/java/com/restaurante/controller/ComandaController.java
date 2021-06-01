@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.restaurante.model.Produto;
-import com.restaurante.service.ProdutoService;
+import com.restaurante.model.Comanda;
+import com.restaurante.service.ComandaService;
 
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/convenio")
+public class ComandaController {
 	
 	@Autowired
-	ProdutoService produtoService;
+	ComandaService convenioService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<String> getFindAllProducts(){
+	public ResponseEntity<String> getFindAllComandas(){
 		try {
-			List<Produto> produtos = this.produtoService.findAllProdutos();
+			List<Comanda> convenios = this.convenioService.findAllComandas();
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produtos);
+			String retorno = gson.toJson(convenios);
 			return new ResponseEntity<String>(retorno, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -38,12 +38,12 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/find")
-	public ResponseEntity<String> getFindProduto(@RequestParam(value="id", required=true) String id) {
+	public ResponseEntity<String> getFindComanda(@RequestParam(value="id", required=true) String id) {
 		try {
-			Produto produto =  this.produtoService.findProduto(id);
+			Comanda convenio =  this.convenioService.findComanda(id);
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produto);
-			if(produto != null) {
+			String retorno = gson.toJson(convenio);
+			if(convenio != null) {
 				return new ResponseEntity<String>(retorno, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(value = "/save")
-	public ResponseEntity<String> getSaveProduto(@RequestBody Produto produto) {
+	public ResponseEntity<String> getSaveComanda(@RequestBody Comanda convenio) {
 		try {
-			produto.setDataCadastro(new Date());  
-			this.produtoService.saveProduto(produto);
+			convenio.setDataCadastro(new Date());  
+			this.convenioService.saveComanda(convenio);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -65,9 +65,9 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> getDeleteProduto(@RequestParam(value="id", required=true) String id){
+	public ResponseEntity<String> getDeleteComanda(@RequestParam(value="id", required=true) String id){
 		try {
-			this.produtoService.deleteProduto(id);
+			this.convenioService.deleteComanda(id);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

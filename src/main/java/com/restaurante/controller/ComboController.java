@@ -1,6 +1,5 @@
 package com.restaurante.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.restaurante.model.Produto;
-import com.restaurante.service.ProdutoService;
+import com.restaurante.model.Combo;
+import com.restaurante.service.ComboService;
 
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/combo")
+public class ComboController {
 	
 	@Autowired
-	ProdutoService produtoService;
+	ComboService comboService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<String> getFindAllProducts(){
+	public ResponseEntity<String> getFindAllCombos(){
 		try {
-			List<Produto> produtos = this.produtoService.findAllProdutos();
+			List<Combo> combos = this.comboService.findAllCombos();
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produtos);
+			String retorno = gson.toJson(combos);
 			return new ResponseEntity<String>(retorno, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -38,12 +37,12 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/find")
-	public ResponseEntity<String> getFindProduto(@RequestParam(value="id", required=true) String id) {
+	public ResponseEntity<String> getFindCombo(@RequestParam(value="id", required=true) String id) {
 		try {
-			Produto produto =  this.produtoService.findProduto(id);
+			Combo combo =  this.comboService.findCombo(id);
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produto);
-			if(produto != null) {
+			String retorno = gson.toJson(combo);
+			if(combo != null) {
 				return new ResponseEntity<String>(retorno, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -54,10 +53,9 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(value = "/save")
-	public ResponseEntity<String> getSaveProduto(@RequestBody Produto produto) {
+	public ResponseEntity<String> getSaveCombo(@RequestBody Combo combo) {
 		try {
-			produto.setDataCadastro(new Date());  
-			this.produtoService.saveProduto(produto);
+			this.comboService.saveCombo(combo);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -65,9 +63,9 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> getDeleteProduto(@RequestParam(value="id", required=true) String id){
+	public ResponseEntity<String> getDeleteCombo(@RequestParam(value="id", required=true) String id){
 		try {
-			this.produtoService.deleteProduto(id);
+			this.comboService.deleteCombo(id);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

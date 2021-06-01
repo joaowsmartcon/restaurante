@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.restaurante.model.Produto;
-import com.restaurante.service.ProdutoService;
+import com.restaurante.model.Financeiro;
+import com.restaurante.service.FinanceiroService;
 
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/financeiro")
+public class FinanceiroController {
 	
 	@Autowired
-	ProdutoService produtoService;
+	FinanceiroService financeiroService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<String> getFindAllProducts(){
+	public ResponseEntity<String> getFindAllFinanceiros(){
 		try {
-			List<Produto> produtos = this.produtoService.findAllProdutos();
+			List<Financeiro> financeiros = this.financeiroService.findAllFinanceiros();
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produtos);
+			String retorno = gson.toJson(financeiros);
 			return new ResponseEntity<String>(retorno, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -38,12 +38,12 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/find")
-	public ResponseEntity<String> getFindProduto(@RequestParam(value="id", required=true) String id) {
+	public ResponseEntity<String> getFindFinanceiro(@RequestParam(value="id", required=true) String id) {
 		try {
-			Produto produto =  this.produtoService.findProduto(id);
+			Financeiro financeiro =  this.financeiroService.findFinanceiro(id);
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produto);
-			if(produto != null) {
+			String retorno = gson.toJson(financeiro);
+			if(financeiro != null) {
 				return new ResponseEntity<String>(retorno, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(value = "/save")
-	public ResponseEntity<String> getSaveProduto(@RequestBody Produto produto) {
+	public ResponseEntity<String> getSaveFinanceiro(@RequestBody Financeiro financeiro) {
 		try {
-			produto.setDataCadastro(new Date());  
-			this.produtoService.saveProduto(produto);
+			financeiro.setDataCadastro(new Date());  
+			this.financeiroService.saveFinanceiro(financeiro);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -65,9 +65,9 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> getDeleteProduto(@RequestParam(value="id", required=true) String id){
+	public ResponseEntity<String> getDeleteFinanceiro(@RequestParam(value="id", required=true) String id){
 		try {
-			this.produtoService.deleteProduto(id);
+			this.financeiroService.deleteFinanceiro(id);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

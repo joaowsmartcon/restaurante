@@ -11,6 +11,29 @@ import javax.persistence.Table;
 @Table(name = "finalidade")
 public class Finalidade {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(length = 200)
+	private String descricao;
+
+	Long getId() {
+		return id;
+	}
+
+	void setId(Long id) {
+		this.id = id;
+	}
+
+	String getDescricao() {
+		return descricao;
+	}
+
+	void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -40,28 +63,5 @@ public class Finalidade {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(length = 200)
-	private String descricao;
-
-	Long getId() {
-		return id;
-	}
-
-	void setId(Long id) {
-		this.id = id;
-	}
-
-	String getDescricao() {
-		return descricao;
-	}
-
-	void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 }

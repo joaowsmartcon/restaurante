@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.restaurante.model.Produto;
-import com.restaurante.service.ProdutoService;
+import com.restaurante.model.Recibo;
+import com.restaurante.service.ReciboService;
 
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/recibo")
+public class ReciboController {
 	
 	@Autowired
-	ProdutoService produtoService;
+	ReciboService reciboService;
 	
 	@GetMapping("/all")
-	public ResponseEntity<String> getFindAllProducts(){
+	public ResponseEntity<String> getFindAllRecibos(){
 		try {
-			List<Produto> produtos = this.produtoService.findAllProdutos();
+			List<Recibo> recibos = this.reciboService.findAllRecibos();
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produtos);
+			String retorno = gson.toJson(recibos);
 			return new ResponseEntity<String>(retorno, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -38,12 +38,12 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/find")
-	public ResponseEntity<String> getFindProduto(@RequestParam(value="id", required=true) String id) {
+	public ResponseEntity<String> getFindRecibo(@RequestParam(value="id", required=true) String id) {
 		try {
-			Produto produto =  this.produtoService.findProduto(id);
+			Recibo recibo =  this.reciboService.findRecibo(id);
 			Gson gson = new Gson();
-			String retorno = gson.toJson(produto);
-			if(produto != null) {
+			String retorno = gson.toJson(recibo);
+			if(recibo != null) {
 				return new ResponseEntity<String>(retorno, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -54,10 +54,10 @@ public class ProdutoController {
 	}
 	
 	@PostMapping(value = "/save")
-	public ResponseEntity<String> getSaveProduto(@RequestBody Produto produto) {
+	public ResponseEntity<String> getSaveRecibo(@RequestBody Recibo recibo) {
 		try {
-			produto.setDataCadastro(new Date());  
-			this.produtoService.saveProduto(produto);
+			recibo.setDataCadastro(new Date());  
+			this.reciboService.saveRecibo(recibo);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -65,9 +65,9 @@ public class ProdutoController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> getDeleteProduto(@RequestParam(value="id", required=true) String id){
+	public ResponseEntity<String> getDeleteRecibo(@RequestParam(value="id", required=true) String id){
 		try {
-			this.produtoService.deleteProduto(id);
+			this.reciboService.deleteRecibo(id);
 			return new ResponseEntity<String>("Sucess!", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

@@ -89,7 +89,7 @@ public class Parcela {
 		return dataCadastro;
 	}
 
-	void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
