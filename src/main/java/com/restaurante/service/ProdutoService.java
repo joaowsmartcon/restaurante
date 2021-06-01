@@ -6,7 +6,7 @@ import com.restaurante.model.Produto;
 
 public interface ProdutoService {
 	
-	public List<Produto> findAllProducts();
+	public List<Produto> findAllProdutos();
 	public Produto findProduto(String id);
 	public void saveProduto(Produto produto);
 	public void deleteProduto(String id);
