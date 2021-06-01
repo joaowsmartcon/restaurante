@@ -8,9 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "finalidade")
-public class Finalidade {
+@Table(name = "tipo_recebimento")
+public class TipoRecebimento {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(length = 200)
+	private String descricao;
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -28,7 +35,7 @@ public class Finalidade {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Finalidade other = (Finalidade) obj;
+		TipoRecebimento other = (TipoRecebimento) obj;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;
@@ -41,13 +48,6 @@ public class Finalidade {
 			return false;
 		return true;
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(length = 200)
-	private String descricao;
 
 	Long getId() {
 		return id;
