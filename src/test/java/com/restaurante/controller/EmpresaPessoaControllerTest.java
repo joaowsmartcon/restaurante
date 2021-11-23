@@ -44,7 +44,7 @@ public class EmpresaPessoaControllerTest {
 		mockMvc.perform(post("/empresa-pessoa/save").contentType(MediaType.APPLICATION_JSON).content(requestJson))
 				.andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void saveShouldReturnStatusError() throws Exception {
 		mockMvc.perform(post("/empresa-pessoa/save").contentType(MediaType.APPLICATION_JSON).content("Error"))
@@ -71,10 +71,8 @@ public class EmpresaPessoaControllerTest {
 		mockMvc.perform(delete("/empresa-pessoa/delete").queryParam("id", "null")).andExpect(status().isBadRequest());
 	}
 
-//	    @Test
-//	    public void deleteShouldReturnStatusOk() throws Exception {
-//	        mockMvc.perform(delete("/empresa-pessoa/delete")
-//	        		.queryParam("id", "4"))
-//	                .andExpect(status().isOk());
-//	    }
+	@Test
+	public void deleteShouldReturnStatusOk() throws Exception {
+		mockMvc.perform(delete("/empresa-pessoa/delete").queryParam("id", "1")).andExpect(status().isOk());
+	}
 }

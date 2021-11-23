@@ -1,5 +1,6 @@
 package com.restaurante.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -22,8 +23,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.restaurante.model.Comanda;
-import com.restaurante.model.EmpresaPessoa;
+import com.restaurante.model.dto.ComandaDTO;
+import com.restaurante.model.dto.EmpresaPessoaDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -32,18 +33,19 @@ public class ComandaControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@Test
+	public void saveShouldReturnStatusOK() throws Exception {
+		ComandaDTO comanda = new ComandaDTO(1L, new EmpresaPessoaDTO(), new Date(), BigDecimal.TEN, BigDecimal.TEN);
+		assertThat(comanda.getId()).isNotNull();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+		String requestJson = ow.writeValueAsString(comanda);
+		mockMvc.perform(post("/comanda/save").contentType(MediaType.APPLICATION_JSON).content(requestJson))
+				.andExpect(status().isOk());
+	}
 
-//	@Test
-//	public void saveShouldReturnStatusOK() throws Exception {
-//		Comanda comanda = new Comanda(1L, new EmpresaPessoa(), new Date(), BigDecimal.TEN, BigDecimal.TEN);
-//		ObjectMapper mapper = new ObjectMapper();
-//		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-//		ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-//		String requestJson = ow.writeValueAsString(comanda);
-//		mockMvc.perform(post("/comanda/save").contentType(MediaType.APPLICATION_JSON).content(requestJson))
-//				.andExpect(status().isOk());
-//	}
-//	
 	@Test
 	public void saveShouldReturnStatusError() throws Exception {
 		mockMvc.perform(post("/comanda/save").contentType(MediaType.APPLICATION_JSON).content("Error"))
@@ -70,10 +72,8 @@ public class ComandaControllerTest {
 		mockMvc.perform(delete("/comanda/delete").queryParam("id", "null")).andExpect(status().isBadRequest());
 	}
 
-//	    @Test
-//	    public void deleteShouldReturnStatusOk() throws Exception {
-//	        mockMvc.perform(delete("/comanda/delete")
-//	        		.queryParam("id", "3"))
-//	                .andExpect(status().isOk());
-//	    }
+	@Test
+	public void deleteShouldReturnStatusOk() throws Exception {
+		mockMvc.perform(delete("/comanda/delete").queryParam("id", "1")).andExpect(status().isOk());
+	}
 }

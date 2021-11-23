@@ -6,5 +6,5 @@ public interface ComandaService {
 	
 	public ComandaDTO findComanda(String id);
 	public void saveComanda(ComandaDTO comanda);
-	public void deleteComanda(String id);
+	public String deleteComanda(String id);
 }

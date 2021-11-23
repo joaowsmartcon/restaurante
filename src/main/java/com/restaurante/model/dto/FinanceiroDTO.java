@@ -23,6 +23,26 @@ public class FinanceiroDTO {
 	private TipoRecebimentoDTO tipoRecebimentoDTO;
 	private TipoLancamentoDTO tipoLancamentoDTO;
 	
+	public FinanceiroDTO() {
+		
+	}
+	
+	public FinanceiroDTO(Long id, EmpresaPessoaDTO empresaPessoa, Date dataCadastro, Date dataVencimento, Date dataPagamento, BigDecimal valorOriginal
+			, BigDecimal desconto, BigDecimal acrescimo, BigDecimal valorTotal, BigDecimal valorPago, TipoRecebimentoDTO tipoRecebimento, TipoLancamentoDTO tipoLancamento) {
+			this.id = id;
+			this.empresaPessoaDTO = empresaPessoa;
+			this.dataCadastro = dataCadastro;
+			this.dataVencimento = dataVencimento;
+			this.dataPagamento = dataPagamento;
+			this.valorOriginal = valorOriginal;
+			this.desconto = desconto;
+			this.acrescimo = acrescimo;
+			this.valorTotal = valorTotal;
+			this.valorPago = valorPago;
+			this.tipoRecebimentoDTO = tipoRecebimento;
+			this.tipoLancamentoDTO = tipoLancamento;
+		}
+	
 	public static FinanceiroDTO convertFinanceiroToDTO(Financeiro financeiro) {
 		FinanceiroDTO dto = new FinanceiroDTO();
 		dto.setId(financeiro.getId());

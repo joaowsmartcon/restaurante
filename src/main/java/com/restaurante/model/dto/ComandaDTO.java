@@ -16,6 +16,17 @@ public class ComandaDTO {
 	private BigDecimal desconto;
 	private BigDecimal valorTotal;
 	
+	public ComandaDTO() {
+	}
+	
+	public ComandaDTO(long id, EmpresaPessoaDTO empresaPessoaDTO, Date dataCadastro, BigDecimal desconto, BigDecimal valorTotal) {
+		this.id = id;
+		this.pessoaDTO = empresaPessoaDTO;
+		this.dataCadastro = dataCadastro;
+		this.desconto = desconto;
+		this.valorTotal = valorTotal;
+	}
+
 	public static ComandaDTO convertComandaToDTO(Comanda comanda) {
 		ComandaDTO dto = new ComandaDTO();
 		dto.setId(comanda.getId());

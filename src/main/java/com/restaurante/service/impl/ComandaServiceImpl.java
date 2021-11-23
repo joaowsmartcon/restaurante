@@ -41,11 +41,12 @@ public class ComandaServiceImpl implements ComandaService {
 	}
 
 	@Override
-	public void deleteComanda(String id) {
+	public String deleteComanda(String id) {
 		try {
 			Optional<Comanda> comanda = this.comandaRepository.findById(Long.parseLong(id));
 			if (comanda.isPresent())
 				this.comandaRepository.delete(comanda.get());
+			return "SUCCESS";
 		} catch (Exception e) {
 			throw e;
 		}
