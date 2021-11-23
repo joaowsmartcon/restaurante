@@ -1,12 +1,12 @@
 package com.restaurante.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurante.model.Comanda;
+import com.restaurante.model.dto.ComandaDTO;
 import com.restaurante.repository.ComandaRepository;
 import com.restaurante.service.ComandaService;
 
@@ -15,23 +15,14 @@ public class ComandaServiceImpl implements ComandaService {
 
 	@Autowired
 	ComandaRepository comandaRepository;
-	
-	@Override
-	public List<Comanda> findAllComandas() {
-		try {
-			List<Comanda> comandas = this.comandaRepository.findAll();
-			return comandas;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
 
 	@Override
-	public Comanda findComanda(String id) {
+	public ComandaDTO findComanda(String id) {
 		try {
 			Optional<Comanda> comanda =  this.comandaRepository.findById(Long.parseLong(id.toString()));
 			if(comanda.isPresent()) {
-				return comanda.get();
+				ComandaDTO comandaReturn = ComandaDTO.convertComandaToDTO(comanda.get());
+				return comandaReturn;
 			}
 			return null;
 		} catch (Exception e) {
@@ -40,8 +31,9 @@ public class ComandaServiceImpl implements ComandaService {
 	}
 
 	@Override
-	public void saveComanda(Comanda comanda) {
+	public void saveComanda(ComandaDTO comandaDTO) {
 		try {
+			Comanda comanda = Comanda.convertDTO(comandaDTO);
 			this.comandaRepository.save(comanda);
 		} catch (Exception e) {
 			throw e;

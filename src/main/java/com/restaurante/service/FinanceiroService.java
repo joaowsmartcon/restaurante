@@ -1,13 +1,10 @@
 package com.restaurante.service;
 
-import java.util.List;
-
-import com.restaurante.model.Financeiro;
+import com.restaurante.model.dto.FinanceiroDTO;
 
 public interface FinanceiroService {
 	
-	public List<Financeiro> findAllFinanceiros();
-	public Financeiro findFinanceiro(String id);
-	public void saveFinanceiro(Financeiro financeiro);
+	public FinanceiroDTO findFinanceiro(String id);
+	public void saveFinanceiro(FinanceiroDTO financeiro);
 	public void deleteFinanceiro(String id);
 }

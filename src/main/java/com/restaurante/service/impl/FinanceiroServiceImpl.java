@@ -1,12 +1,12 @@
 package com.restaurante.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurante.model.Financeiro;
+import com.restaurante.model.dto.FinanceiroDTO;
 import com.restaurante.repository.FinanceiroRepository;
 import com.restaurante.service.FinanceiroService;
 
@@ -17,21 +17,12 @@ public class FinanceiroServiceImpl implements FinanceiroService {
 	FinanceiroRepository financeiroRepository;
 	
 	@Override
-	public List<Financeiro> findAllFinanceiros() {
-		try {
-			List<Financeiro> financeiros = this.financeiroRepository.findAll();
-			return financeiros;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	@Override
-	public Financeiro findFinanceiro(String id) {
+	public FinanceiroDTO findFinanceiro(String id) {
 		try {
 			Optional<Financeiro> financeiro =  this.financeiroRepository.findById(Long.parseLong(id.toString()));
 			if(financeiro.isPresent()) {
-				return financeiro.get();
+				FinanceiroDTO dto = FinanceiroDTO.convertFinanceiroToDTO(financeiro.get());
+				return dto;
 			}
 			return null;
 		} catch (Exception e) {
@@ -40,8 +31,9 @@ public class FinanceiroServiceImpl implements FinanceiroService {
 	}
 
 	@Override
-	public void saveFinanceiro(Financeiro financeiro) {
+	public void saveFinanceiro(FinanceiroDTO financeiroDTO) {
 		try {
+			Financeiro financeiro = Financeiro.convertDTO(financeiroDTO);
 			this.financeiroRepository.save(financeiro);
 		} catch (Exception e) {
 			throw e;

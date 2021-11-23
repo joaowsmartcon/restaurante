@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Financeiro.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">restaurante</a> &gt; <a href="index.source.html" class="el_package">com.restaurante.model</a> &gt; <span class="el_source">Financeiro.java</span></div><h1>Financeiro.java</h1><pre class="source lang-java linenums">package com.restaurante.model;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.restaurante.model.dto.FinanceiroDTO;
+
+@Entity
+@Table(name = &quot;financeiro&quot;)
+public class Financeiro {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = &quot;idempresapessoa&quot;)
+	private EmpresaPessoa empresaPessoa;
+	
+	@Column(name = &quot;data_cadastro&quot;)
+	private Date dataCadastro;
+	
+	@Column(name = &quot;data_vencimento&quot;)
+	private Date dataVencimento;
+	
+	@Column(name = &quot;data_pagamento&quot;)
+	private Date dataPagamento;
+	
+	@Column(name = &quot;valor_original&quot;, scale = 2)
+	private BigDecimal valorOriginal;
+	
+	@Column(scale = 2)
+	private BigDecimal desconto;
+	
+	@Column(scale = 2)
+	private BigDecimal acrescimo;
+	
+	@Column(name = &quot;valor_total&quot;, scale = 2)
+	private BigDecimal valorTotal;
+	
+	@Column(name = &quot;valor_pago&quot;, scale = 2)
+	private BigDecimal valorPago;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = &quot;idtipo_recebimento&quot;)
+	private TipoRecebimento tipoRecebimento;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = &quot;idtipo_lancamento&quot;)
+	private TipoLancamento tipoLancamento;
+	
+<span class="fc" id="L62">	public Financeiro() {</span>
+		
+<span class="fc" id="L64">	}</span>
+	
+	public Financeiro(Long id, EmpresaPessoa empresaPessoa, Date dataCadastro, Date dataVencimento, Date dataPagamento, BigDecimal valorOriginal
+<span class="nc" id="L67">		, BigDecimal desconto, BigDecimal acrescimo, BigDecimal valorTotal, BigDecimal valorPago, TipoRecebimento tipoRecebimento, TipoLancamento tipoLancamento) {</span>
+<span class="nc" id="L68">		this.id = id;</span>
+<span class="nc" id="L69">		this.empresaPessoa = empresaPessoa;</span>
+<span class="nc" id="L70">		this.dataCadastro = dataCadastro;</span>
+<span class="nc" id="L71">		this.dataVencimento = dataVencimento;</span>
+<span class="nc" id="L72">		this.dataPagamento = dataPagamento;</span>
+<span class="nc" id="L73">		this.valorOriginal = valorOriginal;</span>
+<span class="nc" id="L74">		this.desconto = desconto;</span>
+<span class="nc" id="L75">		this.acrescimo = acrescimo;</span>
+<span class="nc" id="L76">		this.valorTotal = valorTotal;</span>
+<span class="nc" id="L77">		this.valorPago = valorPago;</span>
+<span class="nc" id="L78">		this.tipoRecebimento = tipoRecebimento;</span>
+<span class="nc" id="L79">		this.tipoLancamento = tipoLancamento;</span>
+<span class="nc" id="L80">	}</span>
+	
+	public static Financeiro convertDTO(FinanceiroDTO dto) {
+<span class="nc" id="L83">		Financeiro financeiro = new Financeiro();</span>
+<span class="nc" id="L84">		financeiro.setId(dto.getId());</span>
+<span class="nc" id="L85">		financeiro.setEmpresaPessoa(EmpresaPessoa.convertDTO(dto.getEmpresaPessoaDTO()));</span>
+<span class="nc" id="L86">		financeiro.setDataCadastro(dto.getDataCadastro());</span>
+<span class="nc" id="L87">		financeiro.setDesconto(dto.getDesconto());</span>
+<span class="nc" id="L88">		financeiro.setValorTotal(dto.getValorTotal());</span>
+<span class="nc" id="L89">		financeiro.setAcrescimo(dto.getAcrescimo());</span>
+<span class="nc" id="L90">		financeiro.setDataPagamento(dto.getDataPagamento());</span>
+<span class="nc" id="L91">		financeiro.setDataVencimento(dto.getDataVencimento());</span>
+<span class="nc" id="L92">		financeiro.setTipoLancamento(TipoLancamento.convertDTO(dto.getTipoLancamentoDTO()));</span>
+<span class="nc" id="L93">		financeiro.setTipoRecebimento(TipoRecebimento.convertDTO(dto.getTipoRecebimentoDTO()));</span>
+<span class="nc" id="L94">		financeiro.setValorOriginal(dto.getValorOriginal());</span>
+<span class="nc" id="L95">		financeiro.setValorPago(dto.getValorPago());</span>
+<span class="nc" id="L96">		financeiro.setValorTotal(dto.getValorTotal());</span>
+<span class="nc" id="L97">		return financeiro;</span>
+	}
+
+	public Long getId() {
+<span class="fc" id="L101">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="nc" id="L105">		this.id = id;</span>
+<span class="nc" id="L106">	}</span>
+
+	public EmpresaPessoa getEmpresaPessoa() {
+<span class="fc" id="L109">		return empresaPessoa;</span>
+	}
+
+	public void setEmpresaPessoa(EmpresaPessoa empresaPessoa) {
+<span class="nc" id="L113">		this.empresaPessoa = empresaPessoa;</span>
+<span class="nc" id="L114">	}</span>
+
+	public Date getDataCadastro() {
+<span class="fc" id="L117">		return dataCadastro;</span>
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+<span class="fc" id="L121">		this.dataCadastro = dataCadastro;</span>
+<span class="fc" id="L122">	}</span>
+
+	public Date getDataVencimento() {
+<span class="fc" id="L125">		return dataVencimento;</span>
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+<span class="nc" id="L129">		this.dataVencimento = dataVencimento;</span>
+<span class="nc" id="L130">	}</span>
+
+	public Date getDataPagamento() {
+<span class="fc" id="L133">		return dataPagamento;</span>
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+<span class="nc" id="L137">		this.dataPagamento = dataPagamento;</span>
+<span class="nc" id="L138">	}</span>
+
+	public BigDecimal getValorOriginal() {
+<span class="fc" id="L141">		return valorOriginal;</span>
+	}
+
+	public void setValorOriginal(BigDecimal valorOriginal) {
+<span class="nc" id="L145">		this.valorOriginal = valorOriginal;</span>
+<span class="nc" id="L146">	}</span>
+
+	public BigDecimal getDesconto() {
+<span class="fc" id="L149">		return desconto;</span>
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+<span class="fc" id="L153">		this.desconto = desconto;</span>
+<span class="fc" id="L154">	}</span>
+
+	public BigDecimal getAcrescimo() {
+<span class="fc" id="L157">		return acrescimo;</span>
+	}
+
+	public void setAcrescimo(BigDecimal acrescimo) {
+<span class="nc" id="L161">		this.acrescimo = acrescimo;</span>
+<span class="nc" id="L162">	}</span>
+
+	public BigDecimal getValorTotal() {
+<span class="fc" id="L165">		return valorTotal;</span>
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+<span class="nc" id="L169">		this.valorTotal = valorTotal;</span>
+<span class="nc" id="L170">	}</span>
+
+	public BigDecimal getValorPago() {
+<span class="fc" id="L173">		return valorPago;</span>
+	}
+
+	public void setValorPago(BigDecimal valorPago) {
+<span class="nc" id="L177">		this.valorPago = valorPago;</span>
+<span class="nc" id="L178">	}</span>
+
+	public TipoRecebimento getTipoRecebimento() {
+<span class="fc" id="L181">		return tipoRecebimento;</span>
+	}
+
+	public void setTipoRecebimento(TipoRecebimento tipoRecebimento) {
+<span class="nc" id="L185">		this.tipoRecebimento = tipoRecebimento;</span>
+<span class="nc" id="L186">	}</span>
+
+	public TipoLancamento getTipoLancamento() {
+<span class="fc" id="L189">		return tipoLancamento;</span>
+	}
+
+	public void setTipoLancamento(TipoLancamento tipoLancamento) {
+<span class="nc" id="L193">		this.tipoLancamento = tipoLancamento;</span>
+<span class="nc" id="L194">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

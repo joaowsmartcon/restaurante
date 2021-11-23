@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FinanceiroDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">restaurante</a> &gt; <a href="index.source.html" class="el_package">com.restaurante.model.dto</a> &gt; <span class="el_source">FinanceiroDTO.java</span></div><h1>FinanceiroDTO.java</h1><pre class="source lang-java linenums">package com.restaurante.model.dto;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.restaurante.model.Financeiro;
+
+<span class="fc" id="L11">public class FinanceiroDTO {</span>
+
+	private Long id;
+	private EmpresaPessoaDTO empresaPessoaDTO;
+	private Date dataCadastro;
+	private Date dataVencimento;
+	private Date dataPagamento;
+	private BigDecimal valorOriginal;
+	private BigDecimal desconto;
+	private BigDecimal acrescimo;
+	private BigDecimal valorTotal;
+	private BigDecimal valorPago;
+	private TipoRecebimentoDTO tipoRecebimentoDTO;
+	private TipoLancamentoDTO tipoLancamentoDTO;
+	
+	public static FinanceiroDTO convertFinanceiroToDTO(Financeiro financeiro) {
+<span class="fc" id="L27">		FinanceiroDTO dto = new FinanceiroDTO();</span>
+<span class="fc" id="L28">		dto.setId(financeiro.getId());</span>
+<span class="fc" id="L29">		dto.setEmpresaPessoaDTO(EmpresaPessoaDTO.convertEmpresaPessoaToDTO(financeiro.getEmpresaPessoa()));</span>
+<span class="fc" id="L30">		dto.setDataCadastro(financeiro.getDataCadastro());</span>
+<span class="fc" id="L31">		dto.setDesconto(financeiro.getDesconto());</span>
+<span class="fc" id="L32">		dto.setValorTotal(financeiro.getValorTotal());</span>
+<span class="fc" id="L33">		dto.setAcrescimo(financeiro.getAcrescimo());</span>
+<span class="fc" id="L34">		dto.setDataPagamento(financeiro.getDataPagamento());</span>
+<span class="fc" id="L35">		dto.setDataVencimento(financeiro.getDataVencimento());</span>
+<span class="fc" id="L36">		dto.setTipoLancamentoDTO(TipoLancamentoDTO.convertTipoLancamentoToDTO(financeiro.getTipoLancamento()));</span>
+<span class="fc" id="L37">		dto.setTipoRecebimentoDTO(TipoRecebimentoDTO.convertTipoRecebimentoToDTO(financeiro.getTipoRecebimento()));</span>
+<span class="fc" id="L38">		dto.setValorOriginal(financeiro.getValorOriginal());</span>
+<span class="fc" id="L39">		dto.setValorPago(financeiro.getValorPago());</span>
+<span class="fc" id="L40">		dto.setValorTotal(financeiro.getValorTotal());</span>
+<span class="fc" id="L41">		return dto;</span>
+	}
+	
+	public static List&lt;FinanceiroDTO&gt; convertListToDTO(List&lt;Financeiro&gt; financeiros) {
+<span class="nc" id="L45">		List&lt;FinanceiroDTO&gt; listDTOs = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L46">		listDTOs = financeiros.stream().map(financeiro -&gt; {</span>
+<span class="nc" id="L47">			return convertFinanceiroToDTO(financeiro);</span>
+<span class="nc" id="L48">		}).collect(Collectors.toList());</span>
+<span class="nc" id="L49">		return listDTOs;</span>
+	}
+
+	public Long getId() {
+<span class="nc" id="L53">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L57">		this.id = id;</span>
+<span class="fc" id="L58">	}</span>
+
+	public EmpresaPessoaDTO getEmpresaPessoaDTO() {
+<span class="nc" id="L61">		return empresaPessoaDTO;</span>
+	}
+
+	public void setEmpresaPessoaDTO(EmpresaPessoaDTO empresaPessoaDTO) {
+<span class="fc" id="L65">		this.empresaPessoaDTO = empresaPessoaDTO;</span>
+<span class="fc" id="L66">	}</span>
+
+	public Date getDataCadastro() {
+<span class="nc" id="L69">		return dataCadastro;</span>
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+<span class="fc" id="L73">		this.dataCadastro = dataCadastro;</span>
+<span class="fc" id="L74">	}</span>
+
+	public Date getDataVencimento() {
+<span class="nc" id="L77">		return dataVencimento;</span>
+	}
+
+	public void setDataVencimento(Date dataVencimento) {
+<span class="fc" id="L81">		this.dataVencimento = dataVencimento;</span>
+<span class="fc" id="L82">	}</span>
+
+	public Date getDataPagamento() {
+<span class="nc" id="L85">		return dataPagamento;</span>
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+<span class="fc" id="L89">		this.dataPagamento = dataPagamento;</span>
+<span class="fc" id="L90">	}</span>
+
+	public BigDecimal getValorOriginal() {
+<span class="nc" id="L93">		return valorOriginal;</span>
+	}
+
+	public void setValorOriginal(BigDecimal valorOriginal) {
+<span class="fc" id="L97">		this.valorOriginal = valorOriginal;</span>
+<span class="fc" id="L98">	}</span>
+
+	public BigDecimal getDesconto() {
+<span class="nc" id="L101">		return desconto;</span>
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+<span class="fc" id="L105">		this.desconto = desconto;</span>
+<span class="fc" id="L106">	}</span>
+
+	public BigDecimal getAcrescimo() {
+<span class="nc" id="L109">		return acrescimo;</span>
+	}
+
+	public void setAcrescimo(BigDecimal acrescimo) {
+<span class="fc" id="L113">		this.acrescimo = acrescimo;</span>
+<span class="fc" id="L114">	}</span>
+
+	public BigDecimal getValorTotal() {
+<span class="nc" id="L117">		return valorTotal;</span>
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+<span class="fc" id="L121">		this.valorTotal = valorTotal;</span>
+<span class="fc" id="L122">	}</span>
+
+	public BigDecimal getValorPago() {
+<span class="nc" id="L125">		return valorPago;</span>
+	}
+
+	public void setValorPago(BigDecimal valorPago) {
+<span class="fc" id="L129">		this.valorPago = valorPago;</span>
+<span class="fc" id="L130">	}</span>
+
+	public TipoRecebimentoDTO getTipoRecebimentoDTO() {
+<span class="nc" id="L133">		return tipoRecebimentoDTO;</span>
+	}
+
+	public void setTipoRecebimentoDTO(TipoRecebimentoDTO tipoRecebimentoDTO) {
+<span class="fc" id="L137">		this.tipoRecebimentoDTO = tipoRecebimentoDTO;</span>
+<span class="fc" id="L138">	}</span>
+
+	public TipoLancamentoDTO getTipoLancamentoDTO() {
+<span class="nc" id="L141">		return tipoLancamentoDTO;</span>
+	}
+
+	public void setTipoLancamentoDTO(TipoLancamentoDTO tipoLancamentoDTO) {
+<span class="fc" id="L145">		this.tipoLancamentoDTO = tipoLancamentoDTO;</span>
+<span class="fc" id="L146">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

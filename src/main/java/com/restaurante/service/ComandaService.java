@@ -1,13 +1,10 @@
 package com.restaurante.service;
 
-import java.util.List;
-
-import com.restaurante.model.Comanda;
+import com.restaurante.model.dto.ComandaDTO;
 
 public interface ComandaService {
 	
-	public List<Comanda> findAllComandas();
-	public Comanda findComanda(String id);
-	public void saveComanda(Comanda comanda);
+	public ComandaDTO findComanda(String id);
+	public void saveComanda(ComandaDTO comanda);
 	public void deleteComanda(String id);
 }

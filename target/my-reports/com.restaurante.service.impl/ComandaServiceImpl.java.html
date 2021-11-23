@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ComandaServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">restaurante</a> &gt; <a href="index.source.html" class="el_package">com.restaurante.service.impl</a> &gt; <span class="el_source">ComandaServiceImpl.java</span></div><h1>ComandaServiceImpl.java</h1><pre class="source lang-java linenums">package com.restaurante.service.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.restaurante.model.Comanda;
+import com.restaurante.model.dto.ComandaDTO;
+import com.restaurante.repository.ComandaRepository;
+import com.restaurante.service.ComandaService;
+
+@Service(&quot;comandaService&quot;)
+<span class="fc" id="L14">public class ComandaServiceImpl implements ComandaService {</span>
+
+	@Autowired
+	ComandaRepository comandaRepository;
+
+	@Override
+	public ComandaDTO findComanda(String id) {
+		try {
+<span class="fc" id="L22">			Optional&lt;Comanda&gt; comanda =  this.comandaRepository.findById(Long.parseLong(id.toString()));</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">			if(comanda.isPresent()) {</span>
+<span class="fc" id="L24">				ComandaDTO comandaReturn = ComandaDTO.convertComandaToDTO(comanda.get());</span>
+<span class="fc" id="L25">				return comandaReturn;</span>
+			}
+<span class="fc" id="L27">			return null;</span>
+<span class="fc" id="L28">		} catch (Exception e) {</span>
+<span class="fc" id="L29">			throw e;</span>
+		}
+	}
+
+	@Override
+	public void saveComanda(ComandaDTO comandaDTO) {
+		try {
+<span class="nc" id="L36">			Comanda comanda = Comanda.convertDTO(comandaDTO);</span>
+<span class="nc" id="L37">			this.comandaRepository.save(comanda);</span>
+<span class="nc" id="L38">		} catch (Exception e) {</span>
+<span class="nc" id="L39">			throw e;</span>
+<span class="nc" id="L40">		}</span>
+<span class="nc" id="L41">	}</span>
+
+	@Override
+	public void deleteComanda(String id) {
+		try {
+<span class="nc" id="L46">			Optional&lt;Comanda&gt; comanda = this.comandaRepository.findById(Long.parseLong(id));</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">			if (comanda.isPresent())</span>
+<span class="nc" id="L48">				this.comandaRepository.delete(comanda.get());</span>
+<span class="fc" id="L49">		} catch (Exception e) {</span>
+<span class="fc" id="L50">			throw e;</span>
+<span class="nc" id="L51">		}</span>
+<span class="nc" id="L52">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

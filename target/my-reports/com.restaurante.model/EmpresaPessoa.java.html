@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmpresaPessoa.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">restaurante</a> &gt; <a href="index.source.html" class="el_package">com.restaurante.model</a> &gt; <span class="el_source">EmpresaPessoa.java</span></div><h1>EmpresaPessoa.java</h1><pre class="source lang-java linenums">package com.restaurante.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.restaurante.model.dto.EmpresaPessoaDTO;
+
+@Entity
+@Table(name = &quot;empresa_pessoa&quot;)
+public class EmpresaPessoa {
+	 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(length = 200)
+	private String nome;
+	
+	@Column(name = &quot;cpf_cnpj&quot;, length = 150)
+	private String cpfCnpj;
+	
+	@Column(name = &quot;data_nasc&quot;)
+	private Date dataNasc;
+	
+	@Column(length = 200)
+	private String email;
+	
+	@Column(length = 20)
+	private String telefone;
+	
+	@Column(name = &quot;data_cadastro&quot;)
+	private Date dataCadastro;
+	
+	private boolean situacao;
+	
+<span class="fc" id="L42">	public EmpresaPessoa() {</span>
+		
+<span class="fc" id="L44">	}</span>
+	
+	public EmpresaPessoa(Long id, String nome, String cpfCnpj, Date dataNasc, String email, String telefone, 
+<span class="fc" id="L47">			Date dataCadastro, boolean situacao) {</span>
+<span class="fc" id="L48">		this.id = id;</span>
+<span class="fc" id="L49">		this.nome = nome;</span>
+<span class="fc" id="L50">		this.cpfCnpj = cpfCnpj;</span>
+<span class="fc" id="L51">		this.dataNasc = dataNasc;</span>
+<span class="fc" id="L52">		this.email = email;</span>
+<span class="fc" id="L53">		this.telefone = telefone;</span>
+<span class="fc" id="L54">		this.dataCadastro = dataCadastro;</span>
+<span class="fc" id="L55">		this.situacao = situacao;</span>
+<span class="fc" id="L56">	}</span>
+	
+	public static EmpresaPessoa convertDTO(EmpresaPessoaDTO empresaPessoaDTO) {
+<span class="fc" id="L59">		EmpresaPessoa empresa = new EmpresaPessoa();</span>
+<span class="fc" id="L60">		empresa.setId(empresaPessoaDTO.getId());</span>
+<span class="fc" id="L61">		empresa.setDataCadastro(empresaPessoaDTO.getDataCadastro());</span>
+<span class="fc" id="L62">		empresa.setCpfCnpj(empresaPessoaDTO.getCpfCnpj());</span>
+<span class="fc" id="L63">		empresa.setDataNasc(empresaPessoaDTO.getDataNasc());</span>
+<span class="fc" id="L64">		empresa.setEmail(empresaPessoaDTO.getEmail());</span>
+<span class="fc" id="L65">		empresa.setNome(empresaPessoaDTO.getNome());</span>
+<span class="fc" id="L66">		empresa.setSituacao(empresaPessoaDTO.isSituacao());</span>
+<span class="fc" id="L67">		empresa.setTelefone(empresaPessoaDTO.getTelefone());</span>
+<span class="fc" id="L68">		return empresa;</span>
+	}
+
+	public Long getId() {
+<span class="fc" id="L72">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L76">		this.id = id;</span>
+<span class="fc" id="L77">	}</span>
+
+	public String getNome() {
+<span class="fc" id="L80">		return nome;</span>
+	}
+
+	public void setNome(String nome) {
+<span class="fc" id="L84">		this.nome = nome;</span>
+<span class="fc" id="L85">	}</span>
+
+	public String getCpfCnpj() {
+<span class="fc" id="L88">		return cpfCnpj;</span>
+	}
+
+	public void setCpfCnpj(String cpfCnpj) {
+<span class="fc" id="L92">		this.cpfCnpj = cpfCnpj;</span>
+<span class="fc" id="L93">	}</span>
+
+	public Date getDataNasc() {
+<span class="fc" id="L96">		return dataNasc;</span>
+	}
+
+	public void setDataNasc(Date dataNasc) {
+<span class="fc" id="L100">		this.dataNasc = dataNasc;</span>
+<span class="fc" id="L101">	}</span>
+
+	public String getEmail() {
+<span class="fc" id="L104">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="fc" id="L108">		this.email = email;</span>
+<span class="fc" id="L109">	}</span>
+
+	public String getTelefone() {
+<span class="fc" id="L112">		return telefone;</span>
+	}
+
+	public void setTelefone(String telefone) {
+<span class="fc" id="L116">		this.telefone = telefone;</span>
+<span class="fc" id="L117">	}</span>
+
+	public Date getDataCadastro() {
+<span class="fc" id="L120">		return dataCadastro;</span>
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+<span class="fc" id="L124">		this.dataCadastro = dataCadastro;</span>
+<span class="fc" id="L125">	}</span>
+
+	public boolean isSituacao() {
+<span class="fc" id="L128">		return situacao;</span>
+	}
+
+	public void setSituacao(boolean situacao) {
+<span class="fc" id="L132">		this.situacao = situacao;</span>
+<span class="fc" id="L133">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

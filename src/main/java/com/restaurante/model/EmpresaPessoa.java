@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.restaurante.model.dto.EmpresaPessoaDTO;
+
 @Entity
 @Table(name = "empresa_pessoa")
 public class EmpresaPessoa {
@@ -36,56 +38,85 @@ public class EmpresaPessoa {
 	private Date dataCadastro;
 	
 	private boolean situacao;
+	
+	public EmpresaPessoa() {
+		
+	}
+	
+	public EmpresaPessoa(Long id, String nome, String cpfCnpj, Date dataNasc, String email, String telefone, 
+			Date dataCadastro, boolean situacao) {
+		this.id = id;
+		this.nome = nome;
+		this.cpfCnpj = cpfCnpj;
+		this.dataNasc = dataNasc;
+		this.email = email;
+		this.telefone = telefone;
+		this.dataCadastro = dataCadastro;
+		this.situacao = situacao;
+	}
+	
+	public static EmpresaPessoa convertDTO(EmpresaPessoaDTO empresaPessoaDTO) {
+		EmpresaPessoa empresa = new EmpresaPessoa();
+		empresa.setId(empresaPessoaDTO.getId());
+		empresa.setDataCadastro(empresaPessoaDTO.getDataCadastro());
+		empresa.setCpfCnpj(empresaPessoaDTO.getCpfCnpj());
+		empresa.setDataNasc(empresaPessoaDTO.getDataNasc());
+		empresa.setEmail(empresaPessoaDTO.getEmail());
+		empresa.setNome(empresaPessoaDTO.getNome());
+		empresa.setSituacao(empresaPessoaDTO.isSituacao());
+		empresa.setTelefone(empresaPessoaDTO.getTelefone());
+		return empresa;
+	}
 
-	Long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	void setNome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	String getCpfCnpj() {
+	public String getCpfCnpj() {
 		return cpfCnpj;
 	}
 
-	void setCpfCnpj(String cpfCnpj) {
+	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
 
-	Date getDataNasc() {
+	public Date getDataNasc() {
 		return dataNasc;
 	}
 
-	void setDataNasc(Date dataNasc) {
+	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 
-	String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	String getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	void setTelefone(String telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
-	Date getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
@@ -93,75 +124,12 @@ public class EmpresaPessoa {
 		this.dataCadastro = dataCadastro;
 	}
 
-	boolean isSituacao() {
+	public boolean isSituacao() {
 		return situacao;
 	}
 
-	void setSituacao(boolean situacao) {
+	public void setSituacao(boolean situacao) {
 		this.situacao = situacao;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cpfCnpj == null) ? 0 : cpfCnpj.hashCode());
-		result = prime * result + ((dataCadastro == null) ? 0 : dataCadastro.hashCode());
-		result = prime * result + ((dataNasc == null) ? 0 : dataNasc.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + (situacao ? 1231 : 1237);
-		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmpresaPessoa other = (EmpresaPessoa) obj;
-		if (cpfCnpj == null) {
-			if (other.cpfCnpj != null)
-				return false;
-		} else if (!cpfCnpj.equals(other.cpfCnpj))
-			return false;
-		if (dataCadastro == null) {
-			if (other.dataCadastro != null)
-				return false;
-		} else if (!dataCadastro.equals(other.dataCadastro))
-			return false;
-		if (dataNasc == null) {
-			if (other.dataNasc != null)
-				return false;
-		} else if (!dataNasc.equals(other.dataNasc))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (situacao != other.situacao)
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
-			return false;
-		return true;
-	}
 }

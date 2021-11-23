@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmpresaPessoaServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">restaurante</a> &gt; <a href="index.source.html" class="el_package">com.restaurante.service.impl</a> &gt; <span class="el_source">EmpresaPessoaServiceImpl.java</span></div><h1>EmpresaPessoaServiceImpl.java</h1><pre class="source lang-java linenums">package com.restaurante.service.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.restaurante.model.EmpresaPessoa;
+import com.restaurante.model.dto.EmpresaPessoaDTO;
+import com.restaurante.repository.EmpresaPessoaRepository;
+import com.restaurante.service.EmpresaPessoaService;
+
+@Service(&quot;empresaPessoaService&quot;)
+<span class="fc" id="L14">public class EmpresaPessoaServiceImpl implements EmpresaPessoaService {</span>
+
+	@Autowired
+	EmpresaPessoaRepository empresaPessoaRepository;
+
+	@Override
+	public EmpresaPessoaDTO findEmpresaPessoa(String id) {
+		try {
+<span class="fc" id="L22">			Optional&lt;EmpresaPessoa&gt; empresaPessoa =  this.empresaPessoaRepository.findById(Long.parseLong(id.toString()));</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">			if(empresaPessoa.isPresent()) {</span>
+<span class="fc" id="L24">				EmpresaPessoaDTO dto = EmpresaPessoaDTO.convertEmpresaPessoaToDTO(empresaPessoa.get());</span>
+<span class="fc" id="L25">				return dto;</span>
+			}
+<span class="fc" id="L27">			return null;</span>
+<span class="fc" id="L28">		} catch (Exception e) {</span>
+<span class="fc" id="L29">			throw e;</span>
+		}
+	}
+
+	@Override
+	public void saveEmpresaPessoa(EmpresaPessoaDTO empresaPessoaDTO) {
+		try {
+<span class="fc" id="L36">			EmpresaPessoa empresaPessoa = EmpresaPessoa.convertDTO(empresaPessoaDTO);</span>
+<span class="fc" id="L37">			this.empresaPessoaRepository.save(empresaPessoa);</span>
+<span class="nc" id="L38">		} catch (Exception e) {</span>
+<span class="nc" id="L39">			throw e;</span>
+<span class="fc" id="L40">		}</span>
+<span class="fc" id="L41">	}</span>
+
+	@Override
+	public void deleteEmpresaPessoa(String id) {
+		try {
+<span class="nc" id="L46">			Optional&lt;EmpresaPessoa&gt; empresaPessoa = this.empresaPessoaRepository.findById(Long.parseLong(id));</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">			if (empresaPessoa.isPresent())</span>
+<span class="nc" id="L48">				this.empresaPessoaRepository.delete(empresaPessoa.get());</span>
+<span class="fc" id="L49">		} catch (Exception e) {</span>
+<span class="fc" id="L50">			throw e;</span>
+<span class="nc" id="L51">		}</span>
+<span class="nc" id="L52">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

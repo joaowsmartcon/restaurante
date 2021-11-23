@@ -1,0 +1,7 @@
+com\restaurante\controller\FinanceiroControllerTest.class
+com\restaurante\controller\ComandaControllerTest.class
+com\restaurante\dao\ComandaRepositoryTest.class
+com\restaurante\dao\FinanceiroRepositoryTest.class
+com\restaurante\RestauranteApplicationTests.class
+com\restaurante\controller\EmpresaPessoaControllerTest.class
+com\restaurante\dao\EmpresaPessoaRepositoryTest.class

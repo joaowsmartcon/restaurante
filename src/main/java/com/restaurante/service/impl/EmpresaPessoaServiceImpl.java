@@ -1,12 +1,12 @@
 package com.restaurante.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurante.model.EmpresaPessoa;
+import com.restaurante.model.dto.EmpresaPessoaDTO;
 import com.restaurante.repository.EmpresaPessoaRepository;
 import com.restaurante.service.EmpresaPessoaService;
 
@@ -15,23 +15,14 @@ public class EmpresaPessoaServiceImpl implements EmpresaPessoaService {
 
 	@Autowired
 	EmpresaPessoaRepository empresaPessoaRepository;
-	
-	@Override
-	public List<EmpresaPessoa> findAllEmpresaPessoas() {
-		try {
-			List<EmpresaPessoa> empresaPessoas = this.empresaPessoaRepository.findAll();
-			return empresaPessoas;
-		} catch (Exception e) {
-			throw e;
-		}
-	}
 
 	@Override
-	public EmpresaPessoa findEmpresaPessoa(String id) {
+	public EmpresaPessoaDTO findEmpresaPessoa(String id) {
 		try {
 			Optional<EmpresaPessoa> empresaPessoa =  this.empresaPessoaRepository.findById(Long.parseLong(id.toString()));
 			if(empresaPessoa.isPresent()) {
-				return empresaPessoa.get();
+				EmpresaPessoaDTO dto = EmpresaPessoaDTO.convertEmpresaPessoaToDTO(empresaPessoa.get());
+				return dto;
 			}
 			return null;
 		} catch (Exception e) {
@@ -40,8 +31,9 @@ public class EmpresaPessoaServiceImpl implements EmpresaPessoaService {
 	}
 
 	@Override
-	public void saveEmpresaPessoa(EmpresaPessoa empresaPessoa) {
+	public void saveEmpresaPessoa(EmpresaPessoaDTO empresaPessoaDTO) {
 		try {
+			EmpresaPessoa empresaPessoa = EmpresaPessoa.convertDTO(empresaPessoaDTO);
 			this.empresaPessoaRepository.save(empresaPessoa);
 		} catch (Exception e) {
 			throw e;

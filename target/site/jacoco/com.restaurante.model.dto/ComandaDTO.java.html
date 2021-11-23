@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ComandaDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">restaurante</a> &gt; <a href="index.source.html" class="el_package">com.restaurante.model.dto</a> &gt; <span class="el_source">ComandaDTO.java</span></div><h1>ComandaDTO.java</h1><pre class="source lang-java linenums">package com.restaurante.model.dto;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.restaurante.model.Comanda;
+
+<span class="fc" id="L11">public class ComandaDTO {</span>
+
+	private Long id;
+	private EmpresaPessoaDTO pessoaDTO;
+	private Date dataCadastro;
+	private BigDecimal desconto;
+	private BigDecimal valorTotal;
+	
+	public static ComandaDTO convertComandaToDTO(Comanda comanda) {
+<span class="fc" id="L20">		ComandaDTO dto = new ComandaDTO();</span>
+<span class="fc" id="L21">		dto.setId(comanda.getId());</span>
+<span class="fc" id="L22">		dto.setPessoaDTO(EmpresaPessoaDTO.convertEmpresaPessoaToDTO(comanda.getPessoa()));</span>
+<span class="fc" id="L23">		dto.setDataCadastro(comanda.getDataCadastro());</span>
+<span class="fc" id="L24">		dto.setDesconto(comanda.getDesconto());</span>
+<span class="fc" id="L25">		dto.setValorTotal(comanda.getValorTotal());</span>
+<span class="fc" id="L26">		return dto;</span>
+	}
+	
+	public static List&lt;ComandaDTO&gt; convertListToDTO(List&lt;Comanda&gt; comandas) {
+<span class="nc" id="L30">		List&lt;ComandaDTO&gt; listDTOs = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L31">		listDTOs = comandas.stream().map(comanda -&gt; {</span>
+<span class="nc" id="L32">			return convertComandaToDTO(comanda);</span>
+<span class="nc" id="L33">		}).collect(Collectors.toList());</span>
+<span class="nc" id="L34">		return listDTOs;</span>
+	}
+
+	public Long getId() {
+<span class="nc" id="L38">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L42">		this.id = id;</span>
+<span class="fc" id="L43">	}</span>
+
+	public EmpresaPessoaDTO getPessoaDTO() {
+<span class="nc" id="L46">		return pessoaDTO;</span>
+	}
+
+	public void setPessoaDTO(EmpresaPessoaDTO pessoaDTO) {
+<span class="fc" id="L50">		this.pessoaDTO = pessoaDTO;</span>
+<span class="fc" id="L51">	}</span>
+
+	public Date getDataCadastro() {
+<span class="nc" id="L54">		return dataCadastro;</span>
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+<span class="fc" id="L58">		this.dataCadastro = dataCadastro;</span>
+<span class="fc" id="L59">	}</span>
+
+	public BigDecimal getDesconto() {
+<span class="nc" id="L62">		return desconto;</span>
+	}
+
+	public void setDesconto(BigDecimal desconto) {
+<span class="fc" id="L66">		this.desconto = desconto;</span>
+<span class="fc" id="L67">	}</span>
+
+	public BigDecimal getValorTotal() {
+<span class="nc" id="L70">		return valorTotal;</span>
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+<span class="fc" id="L74">		this.valorTotal = valorTotal;</span>
+<span class="fc" id="L75">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
